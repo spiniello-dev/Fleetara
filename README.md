@@ -54,38 +54,3 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 ## License
 
 Fleetara is licensed under the MIT License. See the LICENSE file for details.
-
-
-
-flowchart LR
-  subgraph External APIs
-    A[Samsara API]
-    B[Fleetio API]
-  end
-
-  A -->|DVIRs, telematics, assets, trailers| C[(Ingestion Layer)]
-  B -->|DVIRs, maintenance, fuel, rentals| C
-
-  C --> D[Normalization & Mapping]
-  D --> E[(Database)]
-  E --> F[Reporting & Analytics]
-  F --> G[Web UI Dashboard]
-
-  subgraph Users
-    U1[Ops / Fleet Manager]
-    U2[Maintenance]
-    U3[Finance]
-  end
-
-  G --> U1
-  G --> U2
-  G --> U3
-
-  %% Optional utilities
-  C -.-> L[Rate Limits / Retries]
-  D -.-> V[Validation & Deduping]
-  F -.-> X[Export: CSV/PDF/Email]
-
-  %% Notes
-  classDef accent fill:#eef7ff,stroke:#66a3ff,color:#0b3d91;
-  class C,D,E,F,G accent;
