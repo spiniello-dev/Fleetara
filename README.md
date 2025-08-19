@@ -1,15 +1,18 @@
 # Fleetara
 
-Fleetara is a comprehensive fleet management system designed to streamline the operations of businesses managing a fleet of vehicles. It provides tools for tracking assets, monitoring vehicle usage, managing maintenance schedules, and generating insightful reports to optimize fleet performance.
+Fleetara is a comprehensive fleet management platform designed to give businesses a **one-pane-of-glass view** into their fleet operations. By combining data from the **Samsara** and **Fleetio** APIs, Fleetara unifies **Driver Vehicle Inspection Reports (DVIRs)**, **fuel metrics**, **trailers**, **rental information**, and other fleet tracking tools into a single reporting and management interface.
+
+This integration reduces the need to jump between multiple systems, making it easier to monitor vehicle health, track costs, and optimize performance across your entire fleet.
 
 ## Features
 
-- **Asset Management**: Keep track of all vehicles and equipment in your fleet.
-- **Driver Vehicle Inspection Reports (DVIRs)**: Manage and monitor vehicle inspection reports.
-- **Fuel Tracking**: Record and analyze fuel consumption data.
-- **Maintenance Scheduling**: Plan and track vehicle maintenance to reduce downtime.
-- **Reports**: Generate detailed reports on mileage, fuel usage, and other key metrics.
-- **User Management**: Secure login and password reset functionality for users.
+- **Unified API Integration**: Consolidates data from Samsara and Fleetio for seamless fleet visibility.
+- **Asset Management**: Keep track of all vehicles, trailers, and rental equipment.
+- **Driver Vehicle Inspection Reports (DVIRs)**: Centralize inspection reports across systems for compliance and safety.
+- **Fuel Tracking**: Collect, record, and analyze consumption metrics to identify inefficiencies.
+- **Maintenance Scheduling**: Plan and monitor preventive maintenance to minimize downtime.
+- **Reporting & Analytics**: Generate detailed reports on mileage, fuel usage, DVIR compliance, and more.
+- **User Management**: Secure login, role-based access, and password reset functionality.
 
 ## Technologies Used
 
@@ -51,3 +54,38 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 ## License
 
 Fleetara is licensed under the MIT License. See the LICENSE file for details.
+
+
+
+flowchart LR
+  subgraph External APIs
+    A[Samsara API]
+    B[Fleetio API]
+  end
+
+  A -->|DVIRs, telematics, assets, trailers| C[(Ingestion Layer)]
+  B -->|DVIRs, maintenance, fuel, rentals| C
+
+  C --> D[Normalization & Mapping]
+  D --> E[(Database)]
+  E --> F[Reporting & Analytics]
+  F --> G[Web UI Dashboard]
+
+  subgraph Users
+    U1[Ops / Fleet Manager]
+    U2[Maintenance]
+    U3[Finance]
+  end
+
+  G --> U1
+  G --> U2
+  G --> U3
+
+  %% Optional utilities
+  C -.-> L[Rate Limits / Retries]
+  D -.-> V[Validation & Deduping]
+  F -.-> X[Export: CSV/PDF/Email]
+
+  %% Notes
+  classDef accent fill:#eef7ff,stroke:#66a3ff,color:#0b3d91;
+  class C,D,E,F,G accent;
