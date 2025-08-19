@@ -1,0 +1,38 @@
+# Ignore Composer dependencies
+/vendor/
+
+# Ignore cache and temp files
+/cache/
+*.log
+*.tmp
+
+# Ignore IDE/editor files
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Ignore archive folder
+/archive/
+
+# Ignore environment and secrets
+.env
+*.env
+functions/mail_config.php
+
+# Ignore OS-specific files
+*.bak
+*.old
+
+# Ignore node_modules if present
+/node_modules/
+
+# Ignore other backup files
+*~
+
+# Ignore PHPStorm and JetBrains
+.idea/
+
+# Ignore test output
+/test-output/
